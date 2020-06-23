@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Life from './page/demo/Life';
+import IRoute from './page/route_demo/demo1/router';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Life />
+    <IRoute />
   </React.StrictMode>,
   document.getElementById('root')
 );
