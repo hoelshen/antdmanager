@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import IRoute from './page/route_demo/demo1/router';
+import IRouter from './router';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <IRoute />
-  </React.StrictMode>,
+  <IRouter />,
   document.getElementById('root')
 );
 
