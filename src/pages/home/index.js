@@ -21,6 +21,14 @@ export default class Life extends React.Component{
 
   handlClick(){
     alert('1')
+
+     const a = {}
+
+    // 此处同样会报错
+    console.log(a.name.name)
+
+    // 抛出错误
+    new Error('抛出错误')
   }
 
   render(){
