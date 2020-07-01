@@ -50,7 +50,7 @@ export default class Axios {
     let loading;
     if (options.data && options.data.isShowLoading !== false) {
       loading = document.getElementById("ajaxLoading");
-      // loading.style.display = "block";
+      loading.style.display = "block";
     }
     let baseApi = "";
     if (options.isMock) {
@@ -68,11 +68,13 @@ export default class Axios {
       }).then((response) => {
         if (options.data && options.data.isShowLoading !== false) {
           loading = document.getElementById("ajaxLoading");
-          // loading.style.display = "none";
+          loading.style.display = "none";
         }
-        if (response.status == "200") {
+        console.log('response: ', response.data);
+        if (response.status === 200) {
           let res = response.data;
-          if (res.code == "0") {
+          console.log('res: ', res);
+          if (res.code === 0) {
             resolve(res);
           } else {
             Modal.info({

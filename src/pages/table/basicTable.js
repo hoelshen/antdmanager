@@ -65,6 +65,7 @@ export default class BasicTable extends React.Component{
                 }
             }
         }).then((res)=>{
+          console.log('res: ', res);
             if(res.code == 0){
                 res.result.list.map((item, index) => {
                     item.key = index;
@@ -74,6 +75,7 @@ export default class BasicTable extends React.Component{
                     selectedRowKeys:[],
                     selectedRows:null,
                     pagination: Utils.pagination(res,(current)=>{
+                      console.log('current: ', current);
                         _this.params.page = current;
                         this.request();
                     })
@@ -128,7 +130,7 @@ export default class BasicTable extends React.Component{
                 key: 'sex',
                 dataIndex: 'sex',
                 render(sex){
-                    return sex ==1 ?'男':'女'
+                    return sex ===1 ?'男':'女'
                 }
             },
             {
@@ -189,6 +191,11 @@ export default class BasicTable extends React.Component{
             type: 'checkbox',
             selectedRowKeys,
             onChange:(selectedRowKeys,selectedRows)=>{
+              let ids = [];
+              selectedRows.map((item)=>{
+                ids.push(item.id)
+              })
+
                 this.setState({
                     selectedRowKeys,
                     selectedRows
