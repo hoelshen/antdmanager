@@ -8,10 +8,6 @@ const FormItem = Form.Item;
 
 export default class FormLogin extends React.Component {
   formRef = React.createRef();
-
-  
-
-
   componentDidMount() {
     this.formRef.current.setFieldsValue({
       username: "Bamboo",
