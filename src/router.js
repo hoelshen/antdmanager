@@ -17,7 +17,9 @@ import FormLogin from './pages/form/login'
 import FormRegister from './pages/form/register'
 import basicTable from './pages/table/basicTable'
 import highTable from './pages/table/highTable'
-// import Order from './pages/order/index'
+import Common from './common'
+import OrderDetail from './pages/order/detail'
+import Order from './pages/order/index'
 import City from './pages/city/index'
 
 
@@ -29,12 +31,6 @@ export default class IRouter extends React.Component{
                 <App>
                     <Switch>
                         <Route path="/login" component={Login}/>
-          {/*               <Route path="/common" render={() =>
-                            <Common>
-                                <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
-                            </Common>  
-                        }
-                        /> */}
                         <Route path="/" render={()=>
                             <Admin>
                                 <Switch>
@@ -52,14 +48,19 @@ export default class IRouter extends React.Component{
                                     <Route path="/table/basic" component={basicTable} />
                                     <Route path="/table/high" component={highTable} />
                                     <Route path="/city" component={City} />
-
-                                    {/* <Route path="/order" component={Order} /> */}
+                                    <Route path="/order" component={Order} />
 
                                     <Redirect to="/home" />
                                     <Route component={NoMatch} />
                                 </Switch>
                             </Admin>         
                         } />
+                        <Route path="/common" render={() =>
+                            <Common>
+                                <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
+                            </Common>  
+                        }
+                        />
                     </Switch>
                 </App>
             </HashRouter>
