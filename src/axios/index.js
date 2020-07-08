@@ -15,10 +15,12 @@ export default class Axios {
       data,
     }).then((data) => {
       if (data && data.result) {
+        console.log(' data.result: ',  data.result);
         let list = data.result.item_list.map((item, index) => {
           item.key = index;
           return item;
         });
+        console.log('list', list)
         _this.setState({
           list,
           pagination: Utils.pagination(data, (current) => {
@@ -54,7 +56,7 @@ export default class Axios {
     }
     let baseApi = "";
     if (options.isMock) {
-      baseApi = "https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api";
+      baseApi = "/mock/api";
     } else {
       baseApi = "https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api";
     }
@@ -70,16 +72,16 @@ export default class Axios {
           loading = document.getElementById("ajaxLoading");
           loading.style.display = "none";
         }
-        console.log('response: ', response.data);
         if (response.status === 200) {
-          let res = response.data;
-          console.log('res: ', res);
-          if (res.code === 0) {
-            resolve(res);
+          let data = response.data;
+          console.log('res: ', data);
+          if (data.code === '0') {
+            console.log('data.code: ', data.code);
+            resolve(data);
           } else {
             Modal.info({
               title: "提示",
-              content: res.msg,
+              content: data.msg,
             });
           }
         } else {

@@ -7,8 +7,11 @@ const Option = Select.Option;
 export default class FilterForm extends React.Component{
     cityFormRef = React.createRef();
 
+
     handleFilterSubmit = ()=>{
-        let fieldsValue = this.props.form.getFieldsValue();
+        let fieldsValue = this.cityFormRef.current.getFieldsValue();
+
+        console.log('this.', fieldsValue)
         this.props.filterSubmit(fieldsValue);
     }
 

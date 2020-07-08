@@ -47,7 +47,8 @@ export default class Order extends React.Component{
     }
     requestList = ()=>{
         let _this = this;
-        axios.requestList(this,'/order/list',this.params,true)
+        axios.requestList(_this,'/order/list',_this.params,true)
+        console.log('list', this.state.list)
     }
     // 订单结束确认
     handleConfirm = ()=>{
@@ -180,7 +181,6 @@ export default class Order extends React.Component{
                         selectedIds={this.state.selectedIds}
                         selectedItem={this.state.selectedItem}
                         pagination={this.state.pagination}
-                        // rowSelection="checkbox"
                     />
                 </div>
                 <Modal
