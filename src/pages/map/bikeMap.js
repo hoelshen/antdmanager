@@ -10,9 +10,13 @@ export default class BikeMap extends React.Component{
 
     formList = [
         {
-            type:'城市'
+            type:'城市',
+            field:'city_status',
+
         },{
-            type:'时间查询'
+            type:'时间查询',
+            field:'date_status',
+
         },{
             type:'SELECT',
             label:'订单状态',
@@ -30,6 +34,7 @@ export default class BikeMap extends React.Component{
                 params:this.params
             }
         }).then((res)=>{
+          console.log('res: ', res);
             if(res.code == 0){
                 this.setState({
                     total_count:res.result.total_count
@@ -52,6 +57,7 @@ export default class BikeMap extends React.Component{
     // 渲染地图数据
     renderMap = (res)=>{
         let list = res.result.route_list;
+        console.log('res.result.route_list: ', res.result.route_list);
         this.map = new window.BMap.Map('container');
         let gps1 = list[0].split(',');
         let startPoint = new window.BMap.Point(gps1[0], gps1[1]);

@@ -21,6 +21,14 @@ import Common from './common'
 import OrderDetail from './pages/order/detail'
 import Order from './pages/order/index'
 import City from './pages/city/index'
+import Bar from './pages/echarts/bar'
+import Pie from './pages/echarts/pie'
+import Line from './pages/echarts/line'
+import Rich from './pages/rich/index'
+
+import BikeMap from './pages/map/bikeMap'
+
+import Permission from './pages/permission'
 
 
 export default class IRouter extends React.Component{
@@ -31,6 +39,12 @@ export default class IRouter extends React.Component{
                 <App>
                     <Switch>
                         <Route path="/login" component={Login}/>
+                        <Route path="/common" render={() =>
+                            <Common>
+                                <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
+                            </Common>  
+                        }
+                        />                        
                         <Route path="/" render={()=>
                             <Admin>
                                 <Switch>
@@ -49,18 +63,18 @@ export default class IRouter extends React.Component{
                                     <Route path="/table/high" component={highTable} />
                                     <Route path="/city" component={City} />
                                     <Route path="/order" component={Order} />
-
+                                    <Route path="/bikeMap" component={BikeMap} />
+                                    <Route path="/charts/bar" component={Bar} />
+                                    <Route path="/charts/line" component={Line} />
+                                    <Route path="/charts/pie" component={Pie} />
+                                    <Route path="/rich" component={Rich} />
+                                    <Route path="/permission" component={Permission} />
+                                    
                                     <Redirect to="/home" />
                                     <Route component={NoMatch} />
                                 </Switch>
                             </Admin>         
                         } />
-                        <Route path="/common" render={() =>
-                            <Common>
-                                <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
-                            </Common>  
-                        }
-                        />
                     </Switch>
                 </App>
             </HashRouter>
