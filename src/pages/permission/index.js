@@ -8,6 +8,7 @@ const Option = Select.Option;
 const FormItem = Form.Item;
 const TreeNode = Tree.TreeNode;
 export default class PermissionUser extends React.Component {
+
   state = {};
   componentWillMount() {
     axios.requestList(this, "/role/list", {});
@@ -20,7 +21,8 @@ export default class PermissionUser extends React.Component {
   };
   // 角色提交
   handleRoleSubmit = () => {
-    let data = this.roleForm.props.form.getFieldsValue();
+    let data = this.state.roleFormDetail
+    console.log('data: ', data);
     axios
       .ajax({
         url: "role/create",
@@ -33,7 +35,7 @@ export default class PermissionUser extends React.Component {
           this.setState({
             isRoleVisible: false,
           });
-          this.roleForm.props.form.resetFields();
+          this.roleFormRef.resetFields();
           axios.requestList(this, "/role/list", {});
         }
       });
@@ -218,15 +220,13 @@ export default class PermissionUser extends React.Component {
           visible={this.state.isRoleVisible}
           onOk={this.handleRoleSubmit}
           onCancel={() => {
-            this.roleForm.props.form.resetFields();
+            // this.roleFormRef.current.resetFields();
             this.setState({
               isRoleVisible: false,
             });
           }}
         >
-          <RoleForm
-            wrappedComponentRef={(inst) => (this.roleForm = inst)}
-          ></RoleForm>
+          <RoleForm roleFormDetail={this.state.roleFormDetail}></RoleForm>
         </Modal>
         <Modal
           title="设置权限"
@@ -278,15 +278,27 @@ export default class PermissionUser extends React.Component {
   }
 }
 class RoleForm extends React.Component {
+  roleFormRef = React.createRef();
+
+  roleFormDetail = () =>{
+    let data = this.roleFormRef.current.getFieldsValue();
+    console.log('data: ', data);
+    console.log('this.props.: ', this.props);
+    this.props.roleFormDetail(data)
+  }
+
+  onFinish = values => {
+    console.log('Received values of form: ', values);
+  };
+
   render() {
-    const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 5 },
       wrapperCol: { span: 19 },
     };
     return (
-      <Form layout="horizontal">
-        <FormItem label="角色名称" {...formItemLayout} name="role_name">
+      <Form layout="horizontal"  ref={this.roleFormRef} onValuesChange={()=> {this.roleFormDetail()} }>
+        <FormItem label="角色名称" {...formItemLayout} name="role_name" >
           <Input type="text" placeholder="请输入角色名称" />
         </FormItem>
         <FormItem label="状态" {...formItemLayout} name="state">
@@ -319,7 +331,6 @@ class PermEditForm extends React.Component {
     });
   };
   render() {
-    const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 5 },
       wrapperCol: { span: 19 },
@@ -366,7 +377,6 @@ class RoleAuthForm extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 5 },
       wrapperCol: { span: 19 },

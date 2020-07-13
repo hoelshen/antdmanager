@@ -249,71 +249,35 @@ class UserForm extends React.Component{
     render(){
         let type = this.props.type;
         let userInfo = this.props.userInfo || {};
-        const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol:{span:5},
             wrapperCol:{span:19}
         }
         return (
             <Form layout="horizontal">
-                <FormItem label="用户名" {...formItemLayout}>
-                    {
-                        type == 'detail'?userInfo.username:
-                        getFieldDecorator('user_name',{
-                            initialValue:userInfo.username
-                        })(
-                            <Input  type="text" placeholder="请输入用户名"/> 
-                        )
-                    }
+                <FormItem label="用户名" {...formItemLayout} name="user_name" initialValue={userInfo.username}>
+                    <Input  type="text" placeholder="请输入用户名"/> 
                 </FormItem>
-                <FormItem label="性别" {...formItemLayout}>
-                    {
-                        type == 'detail' ? userInfo.sex==1?'男':'女' :
-                        getFieldDecorator('sex',{
-                            initialValue: userInfo.sex
-                        })(
-                            <RadioGroup>
-                                <Radio value={1}>男</Radio>
-                                <Radio value={2}>女</Radio>
-                            </RadioGroup>
-                        )
-                    }
+                <FormItem label="性别" {...formItemLayout} name="sex" initialValue={userInfo.sex}>
+                      <RadioGroup>
+                          <Radio value={1}>男</Radio>
+                          <Radio value={2}>女</Radio>
+                      </RadioGroup>
                 </FormItem>
-                <FormItem label="状态" {...formItemLayout}>
-                    {
-                        type == 'detail' ? this.getState(userInfo.state) :
-                        getFieldDecorator('state',{
-                            initialValue: userInfo.state
-                        })(
-                            <Select>
-                                <Option value={1}>咸鱼一条</Option>
-                                <Option value={2}>风华浪子</Option>
-                                <Option value={3}>北大才子一枚</Option>
-                                <Option value={4}>百度FE</Option>
-                                <Option value={5}>创业者</Option>
-                            </Select>
-                        )
-                    }
+                <FormItem label="状态" {...formItemLayout} name="state" initialValue={userInfo.state}>
+                      <Select>
+                          <Option value={1}>咸鱼一条</Option>
+                          <Option value={2}>风华浪子</Option>
+                          <Option value={3}>北大才子一枚</Option>
+                          <Option value={4}>百度FE</Option>
+                          <Option value={5}>创业者</Option>
+                      </Select>
                 </FormItem>
-                <FormItem label="生日" {...formItemLayout}>
-                    {
-                        type == 'detail' ? userInfo.birthday :
-                        getFieldDecorator('birthday',{
-                            initialValue: moment(userInfo.birthday)
-                        })(
-                            <DatePicker /> 
-                        )
-                    }
+                <FormItem label="生日" {...formItemLayout} name="birthday" initialValue={moment(userInfo.birthday)}>
+                    <DatePicker /> 
                 </FormItem>
-                <FormItem label="联系地址" {...formItemLayout}>
-                    {
-                        type == 'detail' ? userInfo.address :
-                        getFieldDecorator('address',{
-                            initialValue: userInfo.address
-                        })(
-                            <TextArea rows={3} placeholder="请输入联系地址"/>
-                        )
-                    }
+                <FormItem label="联系地址" {...formItemLayout} name="address" initialValue={userInfo.address}>
+                  <TextArea rows={3} placeholder="请输入联系地址"/>
                 </FormItem>
             </Form> 
         );
