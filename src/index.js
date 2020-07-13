@@ -4,7 +4,8 @@ import './index.css';
 import IRouter from './router';
 import * as serviceWorker from './serviceWorker';
 import * as Sentry from '@sentry/browser';
-
+import { Provider } from 'react-redux';
+import configureStore from './redux/store/configureStore';
 Sentry.init({
   release: 'test004',
   dsn: "https://b0e87f818a464f319892f9c0eeb5e39e@o209216.ingest.sentry.io/5303156",
@@ -17,8 +18,12 @@ Sentry.init({
   } */
 });
 
+const store = configureStore();
+
 ReactDOM.render(
-  <IRouter />,
+  <Provider store={store}>
+    <IRouter />
+  </Provider>,
   document.getElementById('root')
 );
 
